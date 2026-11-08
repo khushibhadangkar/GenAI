@@ -1,0 +1,31 @@
+# Python & Virtual Environments
+backend/venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Audio & Cache files
+backend/audio_cache/*.mp3
+!backend/audio_cache/.gitkeep
+
+# Node.js & Vite Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment & Credentials
+.env
+backend/.env
+frontend/.env
+*.local
+
+# System & IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+

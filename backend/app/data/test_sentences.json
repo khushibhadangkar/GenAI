@@ -1,0 +1,23 @@
+[
+  {"id": 1, "source": "Good morning, how are you doing today?", "domain": "Daily Conversation"},
+  {"id": 2, "source": "Machine learning models require large amounts of training data.", "domain": "Technology"},
+  {"id": 3, "source": "The weather is very pleasant in the mountains during spring.", "domain": "Nature"},
+  {"id": 4, "source": "Please submit your research project before Friday evening.", "domain": "Academic"},
+  {"id": 5, "source": "Can you help me find the nearest railway station?", "domain": "Travel"},
+  {"id": 6, "source": "Artificial intelligence is transforming education and healthcare across the world.", "domain": "Technology"},
+  {"id": 7, "source": "She works as a senior software architect in Mumbai.", "domain": "Professional"},
+  {"id": 8, "source": "The library will remain closed on public holidays.", "domain": "Public Information"},
+  {"id": 9, "source": "Drinking plenty of water is essential for maintaining good health.", "domain": "Health"},
+  {"id": 10, "source": "The conference will bring together scientists and engineers from many countries.", "domain": "Science"},
+  {"id": 11, "source": "He turned off the lights before leaving the office.", "domain": "Daily Activity"},
+  {"id": 12, "source": "Renewable energy plays a crucial role in reducing carbon emissions.", "domain": "Environment"},
+  {"id": 13, "source": "Where can I purchase tickets for the historical monument tour?", "domain": "Travel"},
+  {"id": 14, "source": "The students listened attentively to the professor's lecture.", "domain": "Academic"},
+  {"id": 15, "source": "Regular physical exercise improves both physical and mental well-being.", "domain": "Health"},
+  {"id": 16, "source": "The government announced a new policy to support small businesses.", "domain": "Governance"},
+  {"id": 17, "source": "Music has the power to transcend cultural and linguistic boundaries.", "domain": "Culture"},
+  {"id": 18, "source": "Do not forget to save your work frequently while editing documents.", "domain": "Instructions"},
+  {"id": 19, "source": "The farmers celebrated a bountiful harvest after the monsoon rains.", "domain": "Agriculture"},
+  {"id": 20, "source": "Deep learning neural networks can automatically extract complex patterns from data.", "domain": "Technology"}
+]
+

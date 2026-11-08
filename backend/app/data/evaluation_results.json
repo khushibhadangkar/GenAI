@@ -1,0 +1,244 @@
+{
+  "timestamp": "2026-11-08T06:19:45.155167+00:00",
+  "total_sentences": 20,
+  "scores": [
+    {
+      "model": "MarianMT (Helsinki-NLP/opus-mt-en-hi)",
+      "language": "Hindi",
+      "score": 31.04,
+      "signature": "BLEU = 31.04 59.5/37.4/25.1/16.6 (BP = 1.000 ratio = 1.004 hyp_len = 247 ref_len = 246)",
+      "sentence_count": 20,
+      "timestamp": "2026-11-08T06:19:45.153653+00:00"
+    },
+    {
+      "model": "MarianMT (Helsinki-NLP/opus-mt-en-mr)",
+      "language": "Marathi",
+      "score": 2.62,
+      "signature": "BLEU = 2.62 25.2/3.7/2.3/1.5 (BP = 0.619 ratio = 0.676 hyp_len = 127 ref_len = 188)",
+      "sentence_count": 20,
+      "timestamp": "2026-11-08T06:19:45.155139+00:00"
+    }
+  ],
+  "sentences": [
+    {
+      "id": 1,
+      "source": "Good morning, how are you doing today?",
+      "domain": "Daily Conversation",
+      "reference_hi": "सुप्रभात, आज आप कैसे हैं?",
+      "reference_mr": "शुभ सकाळ, आज तुम्ही कसे आहात?",
+      "pred_nmt_hi": "सुप्रभात, आप आज कैसे कर रहे हैं?",
+      "pred_llm_hi": null,
+      "pred_nmt_mr": "आज सकाळी काय करायचं आहे?",
+      "pred_llm_mr": null
+    },
+    {
+      "id": 2,
+      "source": "Machine learning models require large amounts of training data.",
+      "domain": "Technology",
+      "reference_hi": "मशीन लर्निंग मॉडल को बड़ी मात्रा में प्रशिक्षण डेटा की आवश्यकता होती है।",
+      "reference_mr": "मशीन लर्निंग मॉडेल्सना मोठ्या प्रमाणावर प्रशिक्षण डेटाची आवश्यकता असते.",
+      "pred_nmt_hi": "मशीन सीखने के मॉडल सीखने के लिए बड़े मात्रा में प्रशिक्षण डेटा की ज़रूरत होती है.",
+      "pred_llm_hi": null,
+      "pred_nmt_mr": "अनुप्रयोग प्रवेशीय माहिती नियंत्रण विभाग",
+      "pred_llm_mr": null
+    },
+    {
+      "id": 3,
+      "source": "The weather is very pleasant in the mountains during spring.",
+      "domain": "Nature",
+      "reference_hi": "वसंत ऋतु में पहाड़ों में मौसम बहुत सुहावना होता है।",
+      "reference_mr": "वसंत ऋतूत डोंगराळ भागात हवामान अतिशय आल्हाददायक असते.",
+      "pred_nmt_hi": "और पहाड़ों को (ज़मीन) की मेख़े नहीं बनाया",
+      "pred_llm_hi": null,
+      "pred_nmt_mr": "उन्हाळ्यात बर्फ पडतोय.",
+      "pred_llm_mr": null
+    },
+    {
+      "id": 4,
+      "source": "Please submit your research project before Friday evening.",
+      "domain": "Academic",
+      "reference_hi": "कृपया शुक्रवार शाम से पहले अपना शोध प्रोजेक्ट जमा करें।",
+      "reference_mr": "कृपया शुक्रवार संध्याकाळपूर्वी तुमचा संशोधन प्रकल्प सादर करा.",
+      "pred_nmt_hi": "कृपया शुक्रवार की शाम से पहले अपनी शोध परियोजना प्रस्तुत करें.",
+      "pred_llm_hi": null,
+      "pred_nmt_mr": "दुपारच्या कार्यक्रमाचा पहिला भाग दुपारच्या कार्यक्रम असेल.",
+      "pred_llm_mr": null
+    },
+    {
+      "id": 5,
+      "source": "Can you help me find the nearest railway station?",
+      "domain": "Travel",
+      "reference_hi": "क्या आप मुझे निकटतम रेलवे स्टेशन खोजने में मदद कर सकते हैं?",
+      "reference_mr": "तुम्ही मला सर्वात जवळचे रेल्वे स्टेशन शोधण्यात मदत करू शकता का?",
+      "pred_nmt_hi": "क्या आप मुझे सबसे नज़दीकी रेलवे स्टेशन मिल सकते हैं?",
+      "pred_llm_hi": null,
+      "pred_nmt_mr": "तुम्ही माझ्याबरोबर बस करू शकता का?",
+      "pred_llm_mr": null
+    },
+    {
+      "id": 6,
+      "source": "Artificial intelligence is transforming education and healthcare across the world.",
+      "domain": "Technology",
+      "reference_hi": "आर्टिफिशियल इंटेलिजेंस दुनिया भर में शिक्षा और स्वास्थ्य सेवा को बदल रहा है।",
+      "reference_mr": "कृत्रिम बुद्धिमत्ता जगभरातील शिक्षण आणि आरोग्य सेवेत बदल घडवून आणत आहे.",
+      "pred_nmt_hi": "विश्‍व - भर में शिक्षा और स्वास्थ्य के बारे में विज्ञान का विकास हो रहा है ।",
+      "pred_llm_hi": null,
+      "pred_nmt_mr": "आरोग्य समस्या वाढत चालली आहे.",
+      "pred_llm_mr": null
+    },
+    {
+      "id": 7,
+      "source": "She works as a senior software architect in Mumbai.",
+      "domain": "Professional",
+      "reference_hi": "वह मुंबई में एक वरिष्ठ सॉफ्टवेयर आर्किटेक्ट के रूप में काम करती है।",
+      "reference_mr": "ती मुंबईत वरिष्ठ सॉफ्टवेअर आर्किटेक्ट म्हणून काम करते.",
+      "pred_nmt_hi": "वह मुंबई में एक पुराने सॉफ्टवेयर निर्माता के रूप में काम करता है.",
+      "pred_llm_hi": null,
+      "pred_nmt_mr": "तिला मुंबईमध्ये राहायचं आहे.",
+      "pred_llm_mr": null
+    },
+    {
+      "id": 8,
+      "source": "The library will remain closed on public holidays.",
+      "domain": "Public Information",
+      "reference_hi": "पुस्तकालय सार्वजनिक छुट्टियों पर बंद रहेगा।",
+      "reference_mr": "सार्वजनिक सुट्ट्यांच्या दिवशी ग्रंथालय बंद राहील.",
+      "pred_nmt_hi": "पुस्तकालय सार्वजनिक छुट्टियों पर बंद रखा जाएगा.",
+      "pred_llm_hi": null,
+      "pred_nmt_mr": "तो प्रोग्राम बंद केला जाईल.",
+      "pred_llm_mr": null
+    },
+    {
+      "id": 9,
+      "source": "Drinking plenty of water is essential for maintaining good health.",
+      "domain": "Health",
+      "reference_hi": "अच्छे स्वास्थ्य को बनाए रखने के लिए भरपूर पानी पीना आवश्यक है।",
+      "reference_mr": "चांगले आरोग्य राखण्यासाठी भरपूर पाणी पिणे आवश्यक आहे.",
+      "pred_nmt_hi": "अच्छी सेहत बनाए रखने के लिए भरपूर पानी पीना ज़रूरी है ।",
+      "pred_llm_hi": null,
+      "pred_nmt_mr": "अन् नापेक्षा अन् न जास्त चांगलं असतं.",
+      "pred_llm_mr": null
+    },
+    {
+      "id": 10,
+      "source": "The conference will bring together scientists and engineers from many countries.",
+      "domain": "Science",
+      "reference_hi": "यह सम्मेलन कई देशों के वैज्ञानिकों और इंजीनियरों को एक साथ लाएगा।",
+      "reference_mr": "ही परिषद अनेक देशांतील शास्त्रज्ञ आणि अभियंत्यांना एकत्र आणेल.",
+      "pred_nmt_hi": "सम्मेलन कई देशों से वैज्ञानिकों और इंजीनियरों को इकट्ठा करेगा ।",
+      "pred_llm_hi": null,
+      "pred_nmt_mr": "▪ उत्तर अमेरिकेत जवळजवळ ५,००,००० लोक राहतात.",
+      "pred_llm_mr": null
+    },
+    {
+      "id": 11,
+      "source": "He turned off the lights before leaving the office.",
+      "domain": "Daily Activity",
+      "reference_hi": "उसने कार्यालय छोड़ने से पहले लाइटें बंद कर दीं।",
+      "reference_mr": "त्याने कार्यालय सोडण्यापूर्वी दिवे बंद केले.",
+      "pred_nmt_hi": "वह कार्यालय छोड़ने से पहले रोशनी बंद कर दिया.",
+      "pred_llm_hi": null,
+      "pred_nmt_mr": "त्याने टीव्ही बंद केला.",
+      "pred_llm_mr": null
+    },
+    {
+      "id": 12,
+      "source": "Renewable energy plays a crucial role in reducing carbon emissions.",
+      "domain": "Environment",
+      "reference_hi": "नवीकरणीय ऊर्जा कार्बन उत्सर्जन कम करने में महत्वपूर्ण भूमिका निभाती है।",
+      "reference_mr": "नवीकरणीय ऊर्जा कार्बन उत्सर्जन कमी करण्यात महत्त्वपूर्ण भूमिका बजावते.",
+      "pred_nmt_hi": "कार्बन उत्सर्जन कम करने में एक अहम भूमिका अदा करती है ।",
+      "pred_llm_hi": null,
+      "pred_nmt_mr": "या माश् या सहसा आपल्या तोंडातून बाहेर पडतात.",
+      "pred_llm_mr": null
+    },
+    {
+      "id": 13,
+      "source": "Where can I purchase tickets for the historical monument tour?",
+      "domain": "Travel",
+      "reference_hi": "ऐतिहासिक स्मारक दौरे के टिकट मैं कहाँ से खरीद सकता हूँ?",
+      "reference_mr": "ऐतिहासिक स्मारक सहलीची तिकिटे मी कुठून खरेदी करू शकतो?",
+      "pred_nmt_hi": "मैं ऐतिहासिक स्मारक यात्रा के लिए टिकट कहाँ ख़रीद सकता हूँ?",
+      "pred_llm_hi": null,
+      "pred_nmt_mr": "नाताळच्या प्रथा काय आहेत?",
+      "pred_llm_mr": null
+    },
+    {
+      "id": 14,
+      "source": "The students listened attentively to the professor's lecture.",
+      "domain": "Academic",
+      "reference_hi": "छात्रों ने प्रोफेसर के व्याख्यान को ध्यान से सुना।",
+      "reference_mr": "विद्यार्थ्यांनी प्राध्यापकांचे व्याख्यान लक्षपूर्वक ऐकले.",
+      "pred_nmt_hi": "विद्यार्थियों ने प्रोफेसर के भाषण को ध्यान से सुना।",
+      "pred_llm_hi": null,
+      "pred_nmt_mr": "विद्यार्थी वर्गात भाषण ऐकत होते.",
+      "pred_llm_mr": null
+    },
+    {
+      "id": 15,
+      "source": "Regular physical exercise improves both physical and mental well-being.",
+      "domain": "Health",
+      "reference_hi": "नियमित शारीरिक व्यायाम शारीरिक और मानसिक दोनों स्वास्थ्य में सुधार करता है।",
+      "reference_mr": "नियमित शारीरिक व्यायाम शारीरिक आणि मानसिक दोन्ही आरोग्यात सुधारणा करतो.",
+      "pred_nmt_hi": "नियमित रूप से शारीरिक और मानसिक स्वास्थ्य दोनों को बेहतर बनाता है.",
+      "pred_llm_hi": null,
+      "pred_nmt_mr": "दररोज व्यायाम करणं आणि व्यायाम करणं.",
+      "pred_llm_mr": null
+    },
+    {
+      "id": 16,
+      "source": "The government announced a new policy to support small businesses.",
+      "domain": "Governance",
+      "reference_hi": "सरकार ने छोटे व्यवसायों का समर्थन करने के लिए एक नई नीति की घोषणा की।",
+      "reference_mr": "सरकारने लहान व्यवसायांना पाठिंबा देण्यासाठी नवीन धोरण जाहीर केले.",
+      "pred_nmt_hi": "सरकार ने छोटे व्यवसायों का समर्थन करने के लिए एक नई नीति घोषित की.",
+      "pred_llm_hi": null,
+      "pred_nmt_mr": "नवीन शासनाने नवीन सरकार स्थापन केलं.",
+      "pred_llm_mr": null
+    },
+    {
+      "id": 17,
+      "source": "Music has the power to transcend cultural and linguistic boundaries.",
+      "domain": "Culture",
+      "reference_hi": "संगीत में सांस्कृतिक और भाषाई सीमाओं को पार करने की शक्ति होती है।",
+      "reference_mr": "संगीतामध्ये सांस्कृतिक आणि भाषिक सीमा ओलांडण्याची ताकद असते.",
+      "pred_nmt_hi": "संगीत के पास सांस्कृतिक और भाषा की सीमाओं से परे रहने की शक्‍ति है ।",
+      "pred_llm_hi": null,
+      "pred_nmt_mr": "संगीताची आवड निर्माण करण्यासाठी संगीत आणि संगीताची आवड असणे आवश् यक आहे.",
+      "pred_llm_mr": null
+    },
+    {
+      "id": 18,
+      "source": "Do not forget to save your work frequently while editing documents.",
+      "domain": "Instructions",
+      "reference_hi": "दस्तावेज़ संपादित करते समय अपने काम को बार-बार सहेजना न भूलें।",
+      "reference_mr": "दस्तऐवज संपादित करताना आपले काम वारंवार सेव्ह करायला विसरू नका.",
+      "pred_nmt_hi": "दस्तावेज़ के संपादन के दौरान अपने कार्य को बारंबार सहेजने के लिए मत भूलना.",
+      "pred_llm_hi": null,
+      "pred_nmt_mr": "@ info: whatsthis",
+      "pred_llm_mr": null
+    },
+    {
+      "id": 19,
+      "source": "The farmers celebrated a bountiful harvest after the monsoon rains.",
+      "domain": "Agriculture",
+      "reference_hi": "मानसून की बारिश के बाद किसानों ने भरपूर फसल का जश्न मनाया।",
+      "reference_mr": "पावसाळ्यानंतर शेतकऱ्यांनी भरघोस पिकाचा आनंदोत्सव साजरा केला.",
+      "pred_nmt_hi": "मूसलाधार बारिश के बाद किसानों ने भरपूर फसल मनायी ।",
+      "pred_llm_hi": null,
+      "pred_nmt_mr": "यु. पू.",
+      "pred_llm_mr": null
+    },
+    {
+      "id": 20,
+      "source": "Deep learning neural networks can automatically extract complex patterns from data.",
+      "domain": "Technology",
+      "reference_hi": "डीप लर्निंग न्यूरल नेटवर्क डेटा से जटिल पैटर्न स्वचालित रूप से निकाल सकते हैं।",
+      "reference_mr": "डीप लर्निंग न्यूरल नेटवर्क्स डेटामधून गुंतागुंतीचे पॅटर्न आपोआप काढू शकतात.",
+      "pred_nmt_hi": "गहराई से सीखने वाली तंत्रिका नेटवर्क डेटा से स्वचलित निकाले जा सकते हैं.",
+      "pred_llm_hi": null,
+      "pred_nmt_mr": "वाचनजोगी माहिती पहा.",
+      "pred_llm_mr": null
+    }
+  ]
+}
