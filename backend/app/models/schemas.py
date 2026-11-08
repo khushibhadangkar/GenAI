@@ -144,3 +144,8 @@ class ModelStatusResponse(BaseModel):
     tts_available: bool
     device: str
 
+class LLMConfigRequest(BaseModel):
+    llm_api_key: Optional[str] = None
+    llm_model: Optional[str] = None
+    llm_base_url: Optional[str] = None
+

@@ -211,3 +211,20 @@ export function getBiasExportUrl(): string {
   return `${API_BASE}/bias/export`;
 }
 
+export async function updateModelConfig(config: {
+  llm_api_key?: string;
+  llm_model?: string;
+  llm_base_url?: string;
+}): Promise<ModelStatusResponse> {
+  const res = await fetch(`${API_BASE}/models/config`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(config)
+  });
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.detail || 'Failed to update model configuration');
+  }
+  return res.json();
+}
+

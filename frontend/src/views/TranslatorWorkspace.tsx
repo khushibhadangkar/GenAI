@@ -196,14 +196,54 @@ export const TranslatorWorkspace: React.FC = () => {
               <ToneSelector value={tone} onChange={setTone} />
             </div>
 
+            {/* Sample Demo Presets */}
+            <div className="space-y-1.5 pt-1">
+              <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
+                Sample Demo Prompts (1-Click)
+              </span>
+              <div className="flex flex-wrap gap-1.5">
+                {[
+                  {
+                    label: '⚙️ Engineering Spec',
+                    text: 'The engineer arrived early and verified all system components before deployment.'
+                  },
+                  {
+                    label: '🩺 Medical Consultation',
+                    text: 'The doctor explained the treatment protocol to the patient with great care.'
+                  },
+                  {
+                    label: '☕ Daily Conversation',
+                    text: 'Good morning! How are you doing today? We should meet for coffee.'
+                  },
+                  {
+                    label: '📚 Academic NLP',
+                    text: 'Neural machine translation models preserve sentence semantics while minimizing grammatical errors.'
+                  },
+                  {
+                    label: '🇮🇳 Cultural Heritage',
+                    text: 'India is a country celebrated for its rich linguistic diversity and vibrant heritage.'
+                  }
+                ].map((preset) => (
+                  <button
+                    key={preset.label}
+                    type="button"
+                    onClick={() => setSourceText(preset.text)}
+                    className="px-2.5 py-1 rounded-lg text-[11px] bg-slate-100/80 hover:bg-brand-50 hover:text-brand-700 text-slate-600 transition-colors border border-slate-200/60"
+                  >
+                    {preset.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {/* Source Textarea */}
-            <div className="space-y-1.5 pt-2">
+            <div className="space-y-1.5 pt-1">
               <div className="flex justify-between items-center">
                 <label className="text-xs font-semibold text-slate-700">English Input Text</label>
                 <span className="text-[11px] font-mono text-slate-400">{sourceText.length} / 5000</span>
               </div>
               <textarea
-                rows={7}
+                rows={6}
                 value={sourceText}
                 onChange={(e) => setSourceText(e.target.value)}
                 placeholder="Type or paste English sentence here... (e.g., The engineer completed the design specifications with exceptional accuracy.)"

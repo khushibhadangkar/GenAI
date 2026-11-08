@@ -40,6 +40,7 @@ export const App: React.FC = () => {
           currentTab={currentTab}
           status={modelStatus}
           onOpenMobile={() => setIsMobileOpen(true)}
+          onConfigUpdated={setModelStatus}
         />
 
         <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">

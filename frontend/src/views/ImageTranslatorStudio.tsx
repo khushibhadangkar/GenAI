@@ -183,6 +183,45 @@ export const ImageTranslatorStudio: React.FC = () => {
               )}
             </div>
 
+            {/* Sample Demo Images */}
+            <div className="space-y-1.5 mb-3">
+              <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
+                Sample Demo Images (1-Click)
+              </span>
+              <div className="grid grid-cols-3 gap-2">
+                {[
+                  { name: 'Classroom', path: '/samples/classroom.jpg', desc: 'Classroom lecture' },
+                  { name: 'Railway Station', path: '/samples/railway_station.jpg', desc: 'Train platform' },
+                  { name: 'Mountain Lake', path: '/samples/mountains.jpg', desc: 'Scenic mountains' }
+                ].map((sample) => (
+                  <button
+                    key={sample.name}
+                    type="button"
+                    onClick={async () => {
+                      try {
+                        const res = await fetch(sample.path);
+                        const blob = await res.blob();
+                        const file = new File([blob], `${sample.name.toLowerCase().replace(/\s+/g, '_')}.jpg`, { type: 'image/jpeg' });
+                        handleFile(file);
+                      } catch (err) {
+                        console.error('Failed to load sample image', err);
+                      }
+                    }}
+                    className="p-1.5 rounded-xl border border-slate-200 hover:border-brand-500 bg-slate-50/50 hover:bg-brand-50/30 text-left transition-all group"
+                  >
+                    <img
+                      src={sample.path}
+                      alt={sample.name}
+                      className="w-full h-12 object-cover rounded-lg border border-slate-200/80 mb-1"
+                    />
+                    <div className="text-[11px] font-semibold text-slate-700 group-hover:text-brand-900 truncate">
+                      {sample.name}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {/* Dropzone */}
             <div
               onDragOver={(e) => e.preventDefault()}

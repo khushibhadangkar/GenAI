@@ -126,6 +126,90 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({ status, on
         <div className="absolute right-48 -bottom-12 w-64 h-64 rounded-full bg-lavender-500/15 blur-3xl pointer-events-none" />
       </div>
 
+      {/* 6-Step Presentation Walkthrough Banner */}
+      <div className="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-7 card-shadow">
+        <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+            <h3 className="font-bold text-slate-900 text-sm">
+              Live Demo Presentation Tour (6 Steps)
+            </h3>
+          </div>
+          <span className="text-[11px] text-slate-400 font-medium hidden sm:inline">
+            Click any step to jump straight to that workspace
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          {[
+            {
+              step: '1',
+              title: 'Interactive Translator',
+              desc: 'MarianMT Seq2Seq + tone conditioning + Devanagari TTS playback',
+              tab: 'translator',
+              badge: 'Real-time'
+            },
+            {
+              step: '2',
+              title: 'Model Comparison',
+              desc: 'Encoder–Decoder vs. Autoregressive LLM side-by-side contrast',
+              tab: 'model-comparison',
+              badge: 'Comparative'
+            },
+            {
+              step: '3',
+              title: 'Multimodal Image Studio',
+              desc: 'BLIP vision-to-text captioning + cascade Indic translation',
+              tab: 'image-translator',
+              badge: 'Multimodal'
+            },
+            {
+              step: '4',
+              title: 'Voice Studio',
+              desc: 'Native Hindi & Marathi neural speech synthesis and audio export',
+              tab: 'voice-studio',
+              badge: 'Audio'
+            },
+            {
+              step: '5',
+              title: 'Gender-Bias Analysis',
+              desc: '10-case profession benchmark audit across target morphology',
+              tab: 'bias-analysis',
+              badge: 'Audit'
+            },
+            {
+              step: '6',
+              title: 'BLEU Evaluation Lab',
+              desc: '20-sentence benchmark with verified SacreBLEU metrics calculation',
+              tab: 'evaluation-lab',
+              badge: 'Benchmark'
+            }
+          ].map((item) => (
+            <button
+              key={item.step}
+              type="button"
+              onClick={() => onNavigate(item.tab)}
+              className="p-3.5 rounded-2xl border border-slate-200 hover:border-brand-500 hover:bg-brand-50/20 text-left transition-all group flex flex-col justify-between"
+            >
+              <div className="flex items-center justify-between w-full mb-1">
+                <span className="text-[10px] font-bold text-brand-700 bg-brand-50 px-2 py-0.5 rounded-md">
+                  Step {item.step} • {item.badge}
+                </span>
+                <ArrowRight className="w-3.5 h-3.5 text-slate-300 group-hover:text-brand-600 group-hover:translate-x-0.5 transition-all" />
+              </div>
+              <div>
+                <h4 className="text-xs font-bold text-slate-800 group-hover:text-brand-900">
+                  {item.title}
+                </h4>
+                <p className="text-[11px] text-slate-500 leading-snug mt-0.5">
+                  {item.desc}
+                </p>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Quick Access Translation Widget */}
       <div className="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 card-shadow space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
