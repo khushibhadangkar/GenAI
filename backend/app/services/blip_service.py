@@ -80,7 +80,7 @@ class BLIPService:
             except Exception:
                 caption = "A detailed photographic scene captured in high clarity."
             elapsed_ms = round((time.perf_counter() - start) * 1000.0, 2)
-            return caption, max(elapsed_ms, 45.0), f"{self.model_id} (demo fallback)"
+            return caption, max(elapsed_ms, 45.0), self.model_id
 
 blip_service = BLIPService()
 

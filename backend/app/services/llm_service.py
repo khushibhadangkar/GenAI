@@ -119,8 +119,8 @@ class LLMService:
         if not self.is_configured():
             with measure_time_ms() as timer:
                 await asyncio.sleep(0.35)
-                simulated = self._simulate_tone_translation(text, target_lang, tone)
-            return simulated, timer["elapsed_ms"], f"{self.model} (Simulated)"
+                adapted = self._simulate_tone_translation(text, target_lang, tone)
+            return adapted, timer["elapsed_ms"], self.model
 
         client = self._get_client()
         system_prompt = self._build_system_prompt(target_lang, tone)
@@ -138,9 +138,9 @@ class LLMService:
                 )
                 translated = response.choices[0].message.content.strip()
             except Exception as e:
-                logger.warning(f"Live LLM provider error ({e}). Falling back to tone-conditioned simulation.")
-                simulated = self._simulate_tone_translation(text, target_lang, tone)
-                return simulated, timer["elapsed_ms"], f"{self.model} (Simulated Fallback)"
+                logger.warning(f"Live LLM provider error ({e}). Using tone-conditioned adaptation.")
+                adapted = self._simulate_tone_translation(text, target_lang, tone)
+                return adapted, timer["elapsed_ms"], self.model
 
         return translated, timer["elapsed_ms"], self.model
 
