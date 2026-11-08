@@ -9,6 +9,7 @@ import { VoiceStudioView } from './views/VoiceStudioView';
 import { BiasAnalysisView } from './views/BiasAnalysisView';
 import { EvaluationLabView } from './views/EvaluationLabView';
 import { AboutProjectView } from './views/AboutProjectView';
+import { DemoTourController } from './components/demo/DemoTourController';
 import { fetchModelStatus } from './api/client';
 import { ModelStatusResponse } from './types';
 
@@ -16,6 +17,7 @@ export const App: React.FC = () => {
   const [currentTab, setCurrentTab] = useState<NavItem>('overview');
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [modelStatus, setModelStatus] = useState<ModelStatusResponse | null>(null);
+  const [isDemoOpen, setIsDemoOpen] = useState(false);
 
   useEffect(() => {
     fetchModelStatus()
@@ -32,6 +34,7 @@ export const App: React.FC = () => {
         device={modelStatus?.device || 'cpu'}
         isMobileOpen={isMobileOpen}
         onCloseMobile={() => setIsMobileOpen(false)}
+        onStartDemo={() => setIsDemoOpen(true)}
       />
 
       {/* Main Content Area */}
@@ -41,6 +44,7 @@ export const App: React.FC = () => {
           status={modelStatus}
           onOpenMobile={() => setIsMobileOpen(true)}
           onConfigUpdated={setModelStatus}
+          onStartDemo={() => setIsDemoOpen(true)}
         />
 
         <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
@@ -66,6 +70,13 @@ export const App: React.FC = () => {
           {currentTab === 'about' && <AboutProjectView />}
         </main>
       </div>
+
+      {/* 2.5-Minute Guided Live Demo HUD & Voiceover Controller */}
+      <DemoTourController
+        isOpen={isDemoOpen}
+        onClose={() => setIsDemoOpen(false)}
+        onNavigateTab={(tab) => setCurrentTab(tab)}
+      />
     </div>
   );
 };

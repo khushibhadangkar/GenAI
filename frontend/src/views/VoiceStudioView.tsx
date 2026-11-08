@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Volume2,
   Sparkles,
@@ -58,6 +58,31 @@ export const VoiceStudioView: React.FC = () => {
       setIsLoading(false);
     }
   };
+
+  // Automated 2.5-Min Demo Mode Trigger
+  useEffect(() => {
+    const handleDemoStep = async (e: any) => {
+      if (e.detail?.step === 'voice-studio') {
+        const text = SAMPLE_TEXTS.hi[0];
+        setTargetLang('hi');
+        setInputText(text);
+        setIsLoading(true);
+        setErrorMsg(null);
+        try {
+          const res = await generateSpeech(text, 'hi', false);
+          setAudioUrl(res.audio_url);
+          setFilename(res.filename);
+        } catch (err: any) {
+          console.warn('Demo voice synthesis fallback:', err);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    window.addEventListener('lingua-demo-step', handleDemoStep);
+    return () => window.removeEventListener('lingua-demo-step', handleDemoStep);
+  }, []);
 
   return (
     <div className="space-y-6 pb-12 max-w-4xl mx-auto">

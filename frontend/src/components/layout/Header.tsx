@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, Globe, CheckCircle2, AlertCircle, SlidersHorizontal } from 'lucide-react';
+import { Menu, Globe, CheckCircle2, AlertCircle, SlidersHorizontal, Sparkles } from 'lucide-react';
 import { NavItem } from './Sidebar';
 import { ModelStatusResponse } from '../../types';
 import { ConfigModal } from '../common/ConfigModal';
@@ -9,6 +9,7 @@ interface HeaderProps {
   status: ModelStatusResponse | null;
   onOpenMobile: () => void;
   onConfigUpdated?: (newStatus: ModelStatusResponse) => void;
+  onStartDemo?: () => void;
 }
 
 const titles: Record<NavItem, { title: string; subtitle: string }> = {
@@ -46,7 +47,7 @@ const titles: Record<NavItem, { title: string; subtitle: string }> = {
   }
 };
 
-export const Header: React.FC<HeaderProps> = ({ currentTab, status, onOpenMobile, onConfigUpdated }) => {
+export const Header: React.FC<HeaderProps> = ({ currentTab, status, onOpenMobile, onConfigUpdated, onStartDemo }) => {
   const [isConfigOpen, setIsConfigOpen] = useState(false);
   const meta = titles[currentTab] || { title: 'Lingua AI', subtitle: 'Translation Platform' };
 
@@ -71,6 +72,20 @@ export const Header: React.FC<HeaderProps> = ({ currentTab, status, onOpenMobile
       </div>
 
       <div className="flex items-center gap-3">
+        {/* 2.5-Min Live Demo Button */}
+        {onStartDemo && (
+          <button
+            type="button"
+            onClick={onStartDemo}
+            className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gradient-to-r from-brand-600 via-indigo-600 to-purple-600 hover:from-brand-700 hover:via-indigo-700 hover:to-purple-700 text-white text-xs font-bold transition-all shadow-md shadow-brand-500/25 hover:shadow-brand-500/40 hover:scale-[1.02] active:scale-[0.98]"
+            title="Launch 2.5-minute full walkthrough with natural voiceover"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-amber-300 animate-spin [animation-duration:4s]" />
+            <span className="hidden sm:inline">2.5-Min Live Demo</span>
+            <span className="sm:hidden">Demo</span>
+          </button>
+        )}
+
         {/* Language badges */}
         <div className="hidden md:flex items-center gap-1.5 px-2.5 py-1 bg-slate-50 border border-slate-200/60 rounded-lg text-xs font-medium text-slate-600">
           <Globe className="w-3.5 h-3.5 text-brand-600" />

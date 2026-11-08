@@ -24,6 +24,9 @@ app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION,
     description="Intelligent English-to-Hindi and English-to-Marathi Translation Platform",
+    docs_url="/api/docs",
+    redoc_url="/api/redoc",
+    openapi_url="/api/openapi.json",
     lifespan=lifespan
 )
 
@@ -45,10 +48,12 @@ app.include_router(evaluation.router)
 app.include_router(bias.router)
 
 @app.get("/")
+@app.get("/api")
+@app.get("/api/")
 def root():
     return {
         "message": f"Welcome to {settings.APP_NAME} API",
-        "docs": "/docs",
+        "docs": "/api/docs",
         "health": "/api/health"
     }
 

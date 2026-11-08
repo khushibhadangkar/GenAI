@@ -14,11 +14,8 @@ import {
   TranslationTone
 } from '../types';
 
-const BACKEND_ORIGIN = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-  ? 'http://127.0.0.1:8000'
-  : '';
-
-const API_BASE = `${BACKEND_ORIGIN}/api`;
+const BACKEND_URL: string = (import.meta as any).env?.VITE_BACKEND_URL || '';
+const API_BASE = BACKEND_URL ? `${BACKEND_URL.replace(/\/$/, '')}/api` : '/api';
 
 export async function fetchHealth() {
   const res = await fetch(`${API_BASE}/health`);
@@ -116,7 +113,7 @@ export async function generateSpeech(
   }
   const data = await res.json();
   if (data.audio_url && data.audio_url.startsWith('/')) {
-    data.audio_url = `${BACKEND_ORIGIN}${data.audio_url}`;
+    data.audio_url = BACKEND_URL ? `${BACKEND_URL.replace(/\/$/, '')}${data.audio_url}` : data.audio_url;
   }
   return data;
 }

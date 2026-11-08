@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   GitCompare,
   Layers,
@@ -74,6 +74,31 @@ export const ModelComparisonView: React.FC = () => {
     setCopiedCard(card);
     setTimeout(() => setCopiedCard(null), 2000);
   };
+
+  // Automated 2.5-Min Demo Mode Trigger
+  useEffect(() => {
+    const handleDemoStep = async (e: any) => {
+      if (e.detail?.step === 'model-comparison') {
+        const demoSentence = PRESET_SENTENCES[0];
+        setInputText(demoSentence);
+        setTargetLang('hi');
+        setTone('formal');
+        setIsLoading(true);
+        setErrorMsg(null);
+        try {
+          const res = await compareTranslations(demoSentence, 'hi', 'formal');
+          setComparison(res);
+        } catch (err: any) {
+          console.warn('Demo model comparison fallback:', err);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    window.addEventListener('lingua-demo-step', handleDemoStep);
+    return () => window.removeEventListener('lingua-demo-step', handleDemoStep);
+  }, []);
 
   return (
     <div className="space-y-8 pb-12">

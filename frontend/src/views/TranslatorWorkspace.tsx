@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Languages,
   Copy,
@@ -59,6 +59,34 @@ export const TranslatorWorkspace: React.FC = () => {
     element.click();
     document.body.removeChild(element);
   };
+
+  // Automated 2.5-Min Demo Mode Trigger
+  useEffect(() => {
+    const handleDemoStep = async (e: any) => {
+      if (e.detail?.step === 'translator') {
+        const demoText = "Artificial intelligence and digital public infrastructure are empowering rural communities across India.";
+        setSourceText(demoText);
+        setTargetLang('hi');
+        setTone('formal');
+        setEngine('nmt');
+        setIsLoading(true);
+        setErrorMsg(null);
+        try {
+          const res = await translateText(demoText, 'hi', 'nmt', 'formal');
+          if (res.results && res.results.length > 0) {
+            setSingleResult(res.results[0]);
+          }
+        } catch (err: any) {
+          console.warn('Demo translation fallback:', err);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    window.addEventListener('lingua-demo-step', handleDemoStep);
+    return () => window.removeEventListener('lingua-demo-step', handleDemoStep);
+  }, []);
 
   const handleClear = () => {
     setSourceText('');

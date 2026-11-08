@@ -9,7 +9,8 @@ import {
   FlaskConical,
   BookOpen,
   Cpu,
-  Sparkles
+  Sparkles,
+  Play
 } from 'lucide-react';
 
 export type NavItem =
@@ -28,6 +29,7 @@ interface SidebarProps {
   device?: string;
   isMobileOpen?: boolean;
   onCloseMobile?: () => void;
+  onStartDemo?: () => void;
 }
 
 const navItems = [
@@ -46,7 +48,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onSelectTab,
   device = 'auto',
   isMobileOpen = false,
-  onCloseMobile
+  onCloseMobile,
+  onStartDemo
 }) => {
   return (
     <>
@@ -80,6 +83,33 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </div>
           </div>
         </div>
+
+        {/* 2.5-Min Live Demo Action Button */}
+        {onStartDemo && (
+          <div className="px-3 pt-3 pb-1">
+            <button
+              type="button"
+              onClick={() => {
+                onStartDemo();
+                if (onCloseMobile) onCloseMobile();
+              }}
+              className="w-full flex items-center justify-between p-2.5 rounded-xl bg-gradient-to-r from-brand-600 via-indigo-600 to-purple-600 hover:from-brand-700 hover:via-indigo-700 hover:to-purple-700 text-white shadow-sm shadow-brand-500/20 transition-all hover:scale-[1.01] active:scale-[0.99] group text-left"
+            >
+              <div className="flex items-center gap-2.5">
+                <div className="p-1.5 rounded-lg bg-white/20 group-hover:bg-white/30 transition-colors">
+                  <Play className="w-3.5 h-3.5 fill-current" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold leading-tight flex items-center gap-1">
+                    <span>2.5-Min Live Demo</span>
+                  </div>
+                  <div className="text-[10px] text-indigo-100 font-medium">Voiceover Walkthrough</div>
+                </div>
+              </div>
+              <Sparkles className="w-3.5 h-3.5 text-amber-300 animate-spin [animation-duration:3s]" />
+            </button>
+          </div>
+        )}
 
         {/* Navigation list */}
         <nav className="flex-1 p-3 space-y-1 overflow-y-auto">

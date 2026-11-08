@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   UploadCloud,
   Image as ImageIcon,
@@ -124,6 +124,41 @@ export const ImageTranslatorStudio: React.FC = () => {
       setIsSynthesizing(false);
     }
   };
+
+  // Automated 2.5-Min Demo Mode Trigger
+  useEffect(() => {
+    const handleDemoStep = async (e: any) => {
+      if (e.detail?.step === 'image-translator') {
+        try {
+          const samplePath = '/samples/classroom.jpg';
+          const sampleName = 'Classroom';
+          const res = await fetch(samplePath);
+          const blob = await res.blob();
+          const file = new File([blob], 'classroom.jpg', { type: 'image/jpeg' });
+          handleFile(file);
+          
+          setIsCaptioning(true);
+          const captionRes = await generateCaption(file);
+          setCaption(captionRes.caption);
+          setCaptionLatency(captionRes.latency_ms);
+          setIsCaptioning(false);
+
+          // Translate caption automatically
+          setIsTranslating(true);
+          const trRes = await translateCaption(captionRes.caption, 'hi', 'nmt', 'neutral');
+          setTranslatedResult(trRes);
+          setIsTranslating(false);
+        } catch (err) {
+          console.warn('Demo image translation fallback:', err);
+          setIsCaptioning(false);
+          setIsTranslating(false);
+        }
+      }
+    };
+
+    window.addEventListener('lingua-demo-step', handleDemoStep);
+    return () => window.removeEventListener('lingua-demo-step', handleDemoStep);
+  }, []);
 
   return (
     <div className="space-y-6 pb-12">
