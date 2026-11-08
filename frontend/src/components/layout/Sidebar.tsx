@@ -101,9 +101,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 </div>
                 <div>
                   <div className="text-xs font-bold leading-tight flex items-center gap-1">
-                    <span>2.5-Min Live Demo</span>
+                    <span>Live Demo</span>
                   </div>
-                  <div className="text-[10px] text-indigo-100 font-medium">Voiceover Walkthrough</div>
+                  <div className="text-[10px] text-indigo-100 font-medium">Guided Voiceover</div>
                 </div>
               </div>
               <Sparkles className="w-3.5 h-3.5 text-amber-300 animate-spin [animation-duration:3s]" />

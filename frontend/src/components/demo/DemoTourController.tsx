@@ -33,112 +33,112 @@ export const DEMO_STEPS: DemoStep[] = [
     id: 'overview',
     tab: 'overview',
     chapterNumber: 1,
-    title: 'System Telemetry & Architecture',
-    subtitle: 'High-performance Indic translation platform with hardware acceleration',
+    title: 'Overview Dashboard',
+    subtitle: 'Active models and system status',
     duration: 20,
     voiceScript:
-      'Welcome to Lingua AI, an enterprise neural translation platform engineered for low-resource Indic languages, focusing on Hindi and Marathi. Built with fine-tuned MarianMT models and hardware acceleration, the platform delivers high-accuracy translation, multimodal captioning, and linguistic fairness diagnostics.',
+      'Welcome to the live demo of Lingua AI. On this dashboard, you can see our active models for Hindi and Marathi translation, system health, and hardware acceleration.',
     highlights: [
-      'Helsinki-NLP MarianMT (OPUS-MT)',
-      'MPS & CUDA Acceleration',
-      'Sub-second Latency Telemetry',
-      'Unified Indic Translation Pipeline'
+      'Active Hindi & Marathi Models',
+      'Hardware Accelerated',
+      'Sub-second Latency',
+      'System Ready'
     ]
   },
   {
     id: 'translator',
     tab: 'translator',
     chapterNumber: 2,
-    title: 'Neural Translation Workspace',
-    subtitle: 'Contextual sentence translation with dynamic tone modulation',
+    title: 'Interactive Translator',
+    subtitle: 'English to Hindi & Marathi translation with tone selection',
     duration: 25,
     voiceScript:
-      'In the Translator Workspace, complex sentences are translated with grammatical fidelity. The platform supports dynamic tone modulation, shifting seamlessly between formal administrative phrasing, everyday colloquial speech, and literary prose. Notice the real-time token metrics and sub-second latency.',
+      'Here is the Translator. Watch as we enter an English sentence and translate it directly into Hindi. Notice how fast it translates, and you can listen to the audio with one click.',
     highlights: [
-      'Bidirectional Indic Tokenizer',
-      'Tone Modulation (Formal / Colloquial / Poetic)',
-      'Confidence Scoring & BLEU Feedback',
-      'One-Click Native Speech Synthesis'
+      'English to Hindi & Marathi',
+      'Tone Selection',
+      'Fast Translation',
+      'Audio Playback'
     ]
   },
   {
     id: 'image-translator',
     tab: 'image-translator',
     chapterNumber: 3,
-    title: 'Multimodal Vision-Language Studio',
-    subtitle: 'BLIP scene understanding paired with cross-lingual Devanagari localization',
+    title: 'Image Translation Studio',
+    subtitle: 'Extracting captions from images and translating them',
     duration: 25,
     voiceScript:
-      'The Image Translation Studio bridges computer vision with cross-lingual accessibility. Powered by Salesforce BLIP, the model analyzes complex visual scenes, extracts dense natural language English captions, and translates them directly into localized Indic scripts for accessibility and e-commerce.',
+      'In the Image Studio, we select a photo. The system identifies what is in the picture, writes an English caption, and immediately translates it into Hindi.',
     highlights: [
-      'Salesforce BLIP Vision-Language Backbone',
-      'Deep Visual Feature Extraction',
-      'Zero-Shot Indic Scene Localization',
-      'Digital Accessibility for Diverse Literacies'
+      'Image Captioning',
+      'Instant Translation',
+      'Visual Input',
+      'Audio Readout'
     ]
   },
   {
     id: 'model-comparison',
     tab: 'model-comparison',
     chapterNumber: 4,
-    title: 'Model Architecture Benchmarking',
-    subtitle: 'Encoder-Decoder MarianMT contrasted with Autoregressive LLMs',
+    title: 'Model Comparison',
+    subtitle: 'Side-by-side comparison of MarianMT and LLM',
     duration: 25,
     voiceScript:
-      'In the Model Comparison Studio, we contrast traditional Encoder-Decoder sequence-to-sequence networks against generative large language models. While LLMs offer creative flexibility, MarianMT delivers five-times faster inference, lower memory footprint, and reliable structural precision.',
+      'Here we compare two different models side by side. You can see their translation outputs, response times, and quality differences on the exact same sentence.',
     highlights: [
-      'Encoder-Decoder vs. Autoregressive LLM',
-      'Side-by-Side Token Latency Profiling',
-      'Formal Honorific Verb Alignment',
-      'Edge & Serverless Deployment Viability'
+      'Side-by-Side Outputs',
+      'Speed Benchmarks',
+      'Translation Quality',
+      'Evaluator Notes'
     ]
   },
   {
     id: 'voice-studio',
     tab: 'voice-studio',
     chapterNumber: 5,
-    title: 'Indic Voice Studio & Synthesis',
-    subtitle: 'Devanagari phonology preservation with audio waveform export',
+    title: 'Voice Studio',
+    subtitle: 'Text-to-speech voice generation for Hindi and Marathi',
     duration: 20,
     voiceScript:
-      'The Voice Studio delivers high-fidelity audio synthesis tailored for Devanagari phonology. With pitch control, cadence modulation, and downloadable audio waveforms, it allows non-literate and visually impaired communities to consume digital services in their mother tongue.',
+      'The Voice Studio turns translated text into natural spoken audio. You can select Hindi or Marathi, generate the speech, and listen to the clear pronunciation.',
     highlights: [
-      'Devanagari Phoneme Preservation',
-      'Cadence & Pitch Normalization',
-      'Real-Time Waveform Generation',
-      'Broadcast-Ready MP3 Audio Export'
+      'Spoken Audio',
+      'Hindi & Marathi Voices',
+      'Waveform Visualizer',
+      'Download MP3'
     ]
   },
   {
     id: 'bias-analysis',
     tab: 'bias-analysis',
     chapterNumber: 6,
-    title: 'Gender Bias & Fairness Auditing',
-    subtitle: 'Systemic stereotype probing and grammatical gender agreement',
+    title: 'Bias Analysis',
+    subtitle: 'Checking fairness in professional translations',
     duration: 20,
     voiceScript:
-      'A key scientific contribution of Lingua AI is our Gender Bias Diagnostic Engine. It tests occupational titles against systemic gender stereotypes, tracking whether professions like Doctor or Nurse suffer from biased pronoun assignment during translation into grammatically gendered Indic languages.',
+      'In this section, we test for gender bias. We check whether jobs like doctor, nurse, or engineer are translated fairly without stereotyping.',
     highlights: [
-      'WinoBias Occupational Diagnostics',
-      'Pronoun Induction Confusion Matrix',
-      'Target Morphology Agreement Verification',
-      'Quantitative Gender Parity Scoring'
+      'Profession Testing',
+      'Fairness Check',
+      'Pronoun Analysis',
+      'Detailed Test Cases'
     ]
   },
   {
     id: 'evaluation-lab',
     tab: 'evaluation-lab',
     chapterNumber: 7,
-    title: 'SacreBLEU Evaluation & Conclusion',
-    subtitle: 'Rigorous automated scoring and gold-standard benchmark validation',
+    title: 'Evaluation Lab',
+    subtitle: 'Testing translation accuracy with BLEU scores',
     duration: 15,
     voiceScript:
-      'Finally, the Evaluation Lab provides rigorous automated benchmarking using SacreBLEU, METEOR, and chrF++ metrics across our gold-standard test corpus. Lingua AI establishes a reliable, responsible, and high-performance foundation for Indic language technology.',
+      'Finally, the Evaluation Lab tests translation accuracy across test sentences using standard BLEU scores. This confirms reliable, high-quality translations.',
     highlights: [
-      'Verified SacreBLEU Score: 32.4 (HI) / 28.7 (MR)',
-      'METEOR & chrF++ Multidimensional Metrics',
-      'Gold-Standard Reference Alignment',
-      'Production-Ready Indic AI Platform'
+      'BLEU Accuracy Score',
+      'Test Dataset',
+      'Quality Benchmarks',
+      'Verified Results'
     ]
   }
 ];
@@ -417,7 +417,7 @@ export const DemoTourController: React.FC<DemoTourControllerProps> = ({
             <div className="flex items-center gap-2.5 flex-wrap">
               <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-500/20 text-red-300 border border-red-500/30 text-[11px] font-bold tracking-wide uppercase">
                 <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
-                Live Demo Mode • 2.5 Min
+                Live Demo
               </span>
 
               <span className="text-xs font-semibold text-slate-300">
@@ -461,7 +461,7 @@ export const DemoTourController: React.FC<DemoTourControllerProps> = ({
           {!isMinimized && (
             <div className="mb-3.5 grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-center">
               {/* Live Voiceover Subtitles */}
-              <div className="lg:col-span-8 p-3 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+              <div className="lg:col-span-8 p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
                 <div className="shrink-0 mt-0.5">
                   {isVoiceSpeaking ? (
                     <div className="flex items-end gap-0.5 h-4 w-4">
@@ -474,10 +474,15 @@ export const DemoTourController: React.FC<DemoTourControllerProps> = ({
                   )}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">
-                    Live Narrator Voiceover {isMuted && '(Muted)'}
-                  </span>
-                  <p className="text-xs sm:text-sm text-slate-100 font-medium leading-relaxed italic">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-[11px] font-bold text-amber-400 uppercase tracking-wider">
+                      Live Caption
+                    </span>
+                    {isMuted && (
+                      <span className="text-[10px] text-red-400 font-medium">(Muted)</span>
+                    )}
+                  </div>
+                  <p className="text-sm sm:text-base text-white font-semibold leading-relaxed">
                     "{currentStep.voiceScript}"
                   </p>
                 </div>
@@ -583,3 +588,4 @@ export const DemoTourController: React.FC<DemoTourControllerProps> = ({
     </aside>
   );
 };
+

@@ -81,8 +81,7 @@ export const Header: React.FC<HeaderProps> = ({ currentTab, status, onOpenMobile
             title="Launch 2.5-minute full walkthrough with natural voiceover"
           >
             <Sparkles className="w-3.5 h-3.5 text-amber-300 animate-spin [animation-duration:4s]" />
-            <span className="hidden sm:inline">2.5-Min Live Demo</span>
-            <span className="sm:hidden">Demo</span>
+            <span>Live Demo</span>
           </button>
         )}
 
