@@ -62,21 +62,37 @@ export const ImageTranslatorStudio: React.FC = () => {
     }
   };
 
-  const handleGenerateCaption = async () => {
-    if (!selectedImage) return;
+  const processImageCaption = async (fileToCaption: File) => {
     setIsCaptioning(true);
     setErrorMsg(null);
     setTranslatedResult(null);
     setAudioUrl(null);
 
     try {
-      const res = await generateCaption(selectedImage);
+      const res = await generateCaption(fileToCaption);
       setCaption(res.caption);
       setCaptionLatency(res.latency_ms);
     } catch (err: any) {
       setErrorMsg(err.message || 'Image captioning failed');
     } finally {
       setIsCaptioning(false);
+    }
+  };
+
+  const handleGenerateCaption = async () => {
+    if (!selectedImage) return;
+    await processImageCaption(selectedImage);
+  };
+
+  const handleSelectSample = async (samplePath: string, sampleName: string) => {
+    try {
+      const res = await fetch(samplePath);
+      const blob = await res.blob();
+      const file = new File([blob], `${sampleName.toLowerCase().replace(/\s+/g, '_')}.jpg`, { type: 'image/jpeg' });
+      handleFile(file);
+      await processImageCaption(file);
+    } catch (err: any) {
+      setErrorMsg('Failed to load sample image');
     }
   };
 
@@ -197,16 +213,7 @@ export const ImageTranslatorStudio: React.FC = () => {
                   <button
                     key={sample.name}
                     type="button"
-                    onClick={async () => {
-                      try {
-                        const res = await fetch(sample.path);
-                        const blob = await res.blob();
-                        const file = new File([blob], `${sample.name.toLowerCase().replace(/\s+/g, '_')}.jpg`, { type: 'image/jpeg' });
-                        handleFile(file);
-                      } catch (err) {
-                        console.error('Failed to load sample image', err);
-                      }
-                    }}
+                    onClick={() => handleSelectSample(sample.path, sample.name)}
                     className="p-1.5 rounded-xl border border-slate-200 hover:border-brand-500 bg-slate-50/50 hover:bg-brand-50/30 text-left transition-all group"
                   >
                     <img

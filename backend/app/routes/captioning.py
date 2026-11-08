@@ -28,7 +28,7 @@ async def translate_caption(req: CaptionTranslateRequest):
     caption = validate_text_input(req.caption)
     target_lang = req.target_lang.value
     
-    if req.engine.value == "llm" and llm_service.is_configured():
+    if req.engine.value == "llm":
         try:
             translated, latency, model_id = await llm_service.translate(
                 caption, target_lang, req.tone.value
