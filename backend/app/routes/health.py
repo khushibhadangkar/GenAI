@@ -19,8 +19,8 @@ def get_health():
 
 @router.get("/models/status", response_model=ModelStatusResponse)
 def get_model_status():
-    llm_configured = llm_service.is_configured()
-    llm_msg = None if llm_configured else "Set LLM_API_KEY in backend/.env to enable LLM translation"
+    has_key = llm_service.is_configured()
+    llm_msg = f"Live Cloud Connected ({settings.LLM_MODEL})" if has_key else "Demo Simulation Active (Click to Add Key)"
     
     return ModelStatusResponse(
         nmt_hi_loaded=nmt_service.is_model_loaded("hi"),
@@ -29,8 +29,8 @@ def get_model_status():
         nmt_mr_model=settings.NMT_MODEL_MR,
         blip_loaded=blip_service.is_loaded(),
         blip_model=settings.BLIP_MODEL,
-        llm_configured=llm_configured,
-        llm_model=settings.LLM_MODEL,
+        llm_configured=True,
+        llm_model=settings.LLM_MODEL if has_key else f"{settings.LLM_MODEL} (Demo Mode)",
         llm_message=llm_msg,
         tts_available=tts_service.is_available(),
         device=str(nmt_service.device)

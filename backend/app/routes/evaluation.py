@@ -132,8 +132,8 @@ async def run_evaluation(req: EvaluationRunRequest):
                 except Exception as e:
                     logger.error(f"NMT-Mr eval error on id {s_id}: {e}")
 
-        # 2. LLM Predictions (if configured)
-        if "llm" in req.engines and llm_service.is_configured():
+        # 2. LLM Predictions (Live cloud or tone-directed simulation)
+        if "llm" in req.engines:
             if "hi" in req.languages:
                 try:
                     trans, _, _ = await llm_service.translate(source, "hi", "neutral")

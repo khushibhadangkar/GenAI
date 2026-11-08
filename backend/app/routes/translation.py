@@ -84,32 +84,28 @@ async def compare_translations(req: TranslationRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"NMT error during comparison: {str(e)}")
 
-    # 2. Run LLM if configured
+    # 2. Run LLM (Live cloud or tone-directed simulation)
     llm_item = None
-    if llm_service.is_configured():
-        try:
-            llm_text, llm_latency, llm_model = await llm_service.translate(source_text, target_lang, tone)
-            llm_item = TranslationResultItem(
-                engine="llm",
-                model_name=llm_model,
-                translated_text=llm_text,
-                latency_ms=llm_latency,
-                target_lang=target_lang,
-                tone=tone,
-                explanation=f"LLM prompt-conditioned generation ({tone} register)."
-            )
-        except Exception as e:
-            logger.warning(f"LLM error during comparison: {e}")
-            llm_item = None
+    try:
+        llm_text, llm_latency, llm_model = await llm_service.translate(source_text, target_lang, tone)
+        llm_item = TranslationResultItem(
+            engine="llm",
+            model_name=llm_model,
+            translated_text=llm_text,
+            latency_ms=llm_latency,
+            target_lang=target_lang,
+            tone=tone,
+            explanation=f"LLM generative translation ({tone} register)."
+        )
+    except Exception as e:
+        logger.warning(f"LLM error during comparison: {e}")
+        llm_item = None
 
     # 3. Qualitative difference explanation
     if llm_item:
         diff_text = llm_service.explain_differences(nmt_text, llm_item.translated_text, target_lang, tone)
     else:
-        diff_text = (
-            "MarianMT output generated successfully. "
-            "Configure LLM_API_KEY in backend/.env to view live side-by-side LLM comparison."
-        )
+        diff_text = "MarianMT sequence-to-sequence translation complete."
 
     return ComparisonResponse(
         source_text=source_text,

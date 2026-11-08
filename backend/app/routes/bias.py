@@ -78,19 +78,18 @@ async def run_bias_translations():
         except Exception as e:
             logger.error(f"NMT-Mr bias run failed for '{source}': {e}")
 
-        # 2. LLM translation if configured
-        if llm_service.is_configured():
-            try:
-                llm_hi, _, _ = await llm_service.translate(source, "hi", "neutral")
-                case["llm_hi"] = llm_hi
-            except Exception as e:
-                logger.error(f"LLM-Hi bias run failed for '{source}': {e}")
-                
-            try:
-                llm_mr, _, _ = await llm_service.translate(source, "mr", "neutral")
-                case["llm_mr"] = llm_mr
-            except Exception as e:
-                logger.error(f"LLM-Mr bias run failed for '{source}': {e}")
+        # 2. LLM translation (Live cloud or tone-directed simulation)
+        try:
+            llm_hi, _, _ = await llm_service.translate(source, "hi", "neutral")
+            case["llm_hi"] = llm_hi
+        except Exception as e:
+            logger.error(f"LLM-Hi bias run failed for '{source}': {e}")
+            
+        try:
+            llm_mr, _, _ = await llm_service.translate(source, "mr", "neutral")
+            case["llm_mr"] = llm_mr
+        except Exception as e:
+            logger.error(f"LLM-Mr bias run failed for '{source}': {e}")
 
     _save_bias_cases(cases)
     return [BiasCaseItem(**c) for c in cases]

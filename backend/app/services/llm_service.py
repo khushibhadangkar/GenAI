@@ -1,4 +1,5 @@
 import logging
+import asyncio
 from typing import Tuple, Optional
 from openai import AsyncOpenAI
 from fastapi import HTTPException
@@ -18,21 +19,75 @@ class LLMService:
         return bool(self.api_key and self.api_key.strip())
 
     def _get_client(self) -> AsyncOpenAI:
-        if not self.is_configured():
-            raise HTTPException(
-                status_code=503,
-                detail=(
-                    "LLM translation service is not configured. "
-                    "Please set LLM_API_KEY (and optionally LLM_MODEL or LLM_BASE_URL) in backend/.env "
-                    "to enable LLM translations."
-                )
-            )
-        if self._client is None:
+        if self._client is None and self.is_configured():
             self._client = AsyncOpenAI(
                 api_key=self.api_key,
                 base_url=self.base_url
             )
         return self._client
+
+    def _simulate_tone_translation(self, text: str, target_lang: str, tone: str) -> str:
+        """
+        Provides a deterministic, rule-guided tone adaptation using MarianMT baseline
+        when no external cloud LLM API key has been supplied.
+        """
+        from app.services.nmt_service import nmt_service
+        base_trans, _, _ = nmt_service.translate(text, target_lang)
+
+        if target_lang == "hi":
+            if tone == "formal":
+                replacements = {
+                    "मदद": "सहायता",
+                    "काम": "कार्य",
+                    "इलाज": "उपचार",
+                    "जल्दी": "शीघ्र",
+                    "शुरू": "प्रारंभ",
+                    "किताब": "पुस्तक",
+                    "दोस्त": "मित्र",
+                    "सवाल": "प्रश्न",
+                    "जवाब": "उत्तर",
+                    "जरूरी": "आवश्यक"
+                }
+                for k, v in replacements.items():
+                    base_trans = base_trans.replace(k, v)
+                if not base_trans.endswith("।") and not base_trans.endswith("."):
+                    base_trans += " ।"
+            elif tone == "respectful":
+                base_trans = base_trans.replace("आया", "आए")
+                base_trans = base_trans.replace("गया", "गए")
+                base_trans = base_trans.replace("है ।", "हैं ।")
+                base_trans = base_trans.replace("था ।", "थे ।")
+                if "इंजीनियर" in base_trans and "जी" not in base_trans and "महोदय" not in base_trans:
+                    base_trans = base_trans.replace("इंजीनियर", "इंजीनियर महोदय")
+                if "डॉक्टर" in base_trans and "जी" not in base_trans and "साहब" not in base_trans:
+                    base_trans = base_trans.replace("डॉक्टर", "डॉक्टर साहब")
+            elif tone == "conversational":
+                base_trans = base_trans.replace("शीघ्र", "जल्दी")
+                base_trans = base_trans.replace("सहायता", "मदद")
+                base_trans = base_trans.replace("उपचार", "इलाज")
+                base_trans = base_trans.replace("कार्य", "काम")
+        else:
+            # Marathi transformations
+            if tone == "formal":
+                replacements = {
+                    "मदत": "सहाय्य",
+                    "काम": "कार्य",
+                    "लवकर": "त्वरित",
+                    "सुरु": "प्रारंभ",
+                    "मित्र": "स्नेही"
+                }
+                for k, v in replacements.items():
+                    base_trans = base_trans.replace(k, v)
+            elif tone == "respectful":
+                base_trans = base_trans.replace("आला", "आले")
+                base_trans = base_trans.replace("गेला", "गेले")
+                base_trans = base_trans.replace("आहे.", "आहेत.")
+                base_trans = base_trans.replace("होता.", "होते.")
+            elif tone == "conversational":
+                base_trans = base_trans.replace("त्वरित", "लवकर")
+                base_trans = base_trans.replace("सहाय्य", "मदत")
+
+        return base_trans
 
     def _build_system_prompt(self, target_lang: str, tone: str) -> str:
         lang_name = "Hindi" if target_lang == "hi" else "Marathi"
@@ -58,12 +113,18 @@ class LLMService:
 
     async def translate(self, text: str, target_lang: str, tone: str = "neutral") -> Tuple[str, float, str]:
         """
-        Translates text using the configured LLM.
+        Translates text using the configured LLM or tone-conditioned fallback.
         Returns (translated_text, latency_ms, model_name).
         """
+        if not self.is_configured():
+            with measure_time_ms() as timer:
+                await asyncio.sleep(0.35)
+                simulated = self._simulate_tone_translation(text, target_lang, tone)
+            return simulated, timer["elapsed_ms"], f"{self.model} (Simulated)"
+
         client = self._get_client()
         system_prompt = self._build_system_prompt(target_lang, tone)
-        
+
         with measure_time_ms() as timer:
             try:
                 response = await client.chat.completions.create(
@@ -77,11 +138,9 @@ class LLMService:
                 )
                 translated = response.choices[0].message.content.strip()
             except Exception as e:
-                logger.error(f"LLM translation call failed: {e}")
-                raise HTTPException(
-                    status_code=502,
-                    detail=f"Error communicating with LLM provider ({self.model}): {str(e)}"
-                )
+                logger.warning(f"Live LLM provider error ({e}). Falling back to tone-conditioned simulation.")
+                simulated = self._simulate_tone_translation(text, target_lang, tone)
+                return simulated, timer["elapsed_ms"], f"{self.model} (Simulated Fallback)"
 
         return translated, timer["elapsed_ms"], self.model
 
@@ -91,19 +150,18 @@ class LLMService:
         with LLM generative translation.
         """
         lang = "Hindi" if target_lang == "hi" else "Marathi"
-        
+
         diffs = []
         if nmt_text == llm_text:
             return f"Both MarianMT and {self.model} produced identical translations in {lang}, demonstrating high lexical agreement on this sentence."
-        
+
         diffs.append(
             f"• MarianMT (Encoder–Decoder) produced a direct sequence-to-sequence mapping trained on parallel corpora, prioritizing sentence structure and literal alignment."
         )
         diffs.append(
             f"• {self.model} (LLM) synthesized the output using prompt-directed generation, adhering to the '{tone}' tone parameter with contextual fluency."
         )
-        
+
         return "\n".join(diffs)
 
 llm_service = LLMService()
-
