@@ -24,7 +24,7 @@ def generate_speech(req: SpeechRequest):
         filename=filename
     )
 
-@router.get("/audio/{filename}")
+@router.api_route("/audio/{filename}", methods=["GET", "HEAD"])
 def stream_audio(filename: str):
     file_path = settings.AUDIO_CACHE_DIR / filename
     if not file_path.exists():

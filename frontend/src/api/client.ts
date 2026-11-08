@@ -14,7 +14,11 @@ import {
   TranslationTone
 } from '../types';
 
-const API_BASE = '/api';
+const BACKEND_ORIGIN = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+  ? 'http://127.0.0.1:8000'
+  : '';
+
+const API_BASE = `${BACKEND_ORIGIN}/api`;
 
 export async function fetchHealth() {
   const res = await fetch(`${API_BASE}/health`);
@@ -110,7 +114,11 @@ export async function generateSpeech(
     const errorData = await res.json().catch(() => ({}));
     throw new Error(errorData.detail || `Speech synthesis failed with status ${res.status}`);
   }
-  return res.json();
+  const data = await res.json();
+  if (data.audio_url && data.audio_url.startsWith('/')) {
+    data.audio_url = `${BACKEND_ORIGIN}${data.audio_url}`;
+  }
+  return data;
 }
 
 export async function fetchEvaluationDataset(): Promise<EvaluationDatasetResponse> {
